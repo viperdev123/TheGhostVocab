@@ -1,0 +1,191 @@
+zombie เดินได้ smoot 1/3/24
+const vocabulary = [
+    { question: "duplicate", options: ["ทำสำเนา", "ที่ร่วมมือกัน"] },
+    { question: "inventory", options: ["รายการสิ่งของ", "กระเป๋า"] },
+    { question: "allocate", options: ["จัดสรร ", "อนุญาต"] },
+    { question: "compatible", options: ["เข้ากันได้", "จัดอันดับ"] },
+    { question: "capacity", options: ["ความจุ", "ประเทศ"] },
+    { question: "durable", options: ["คงทน", "ทุเรียน"] },
+    { question: "task", options: ["งาน", "หน้ากาก"] },
+    { question: "contract", options: ["สัญญา", "ติดต่อ"] },
+    { question: "supply", options: ["จัดหา", "สนับสนุน"] },
+    { question: "omit", options: ["ละไว้", "ไข่เจียว"] },
+    { question: "collaborate", options: ["ร่วมมือ", "ซ้อนทับ"] },
+    { question: "revenue", options: ["รายได้", "แก้แค้น"] },
+    { question: "assistant", options: ["ผู้ช่วย", "ทนทาน"] },
+    { question: "activate", options: ["กระตุ้น", "ตื่นเต้น"] },
+    { question: "temporary", options: ["ชั่วคราว", "ขยะ"] },
+    { question: "frank", options: ["ตรงไปตรงมา", "เพื่อน"] },
+    { question: "inform", options: ["แจ้งให้ทราบ", "เข้าทรง"] },
+    { question: "atmosphere", options: ["บรรยากาศ", "โลก"] },
+    { question: "aware", options: ["ตระหนักรู้", "ระวัง"] },
+    { question: "bankruptcy", options: ["ล้มละลาย", "ธนาคาร"] },
+    { question: "charge ", options: ["ค่าธรรมเนียม", "เปลี่ยน"] },
+    { question: "currency ", options: ["เงินตรา", "ขณะนี้"] },
+    { question: "demand ", options: ["ความต้องการ", "ตลาด"] },
+    { question: "fee", options: ["ค่าธรรมเนียม", "ปราศจาก"] },
+    { question: "loan", options: ["เงินกู้", "โดดเดี่ยว"] },
+    { question: "license", options: ["ใบอนุญาต", "ลายเซ็น"] },
+    { question: "withdraw", options: ["ถอน", "จั่ว"] },
+    { question: "borrow", options: ["ยืม", "ลูกธนู"] },
+    { question: "critical", options: ["วิกฤติ", "ความเสียหาย"] },
+    { question: "factor ", options: ["ปัจจัย", "โรงงาน"] },
+    { question: "fail", options: ["	ล้มเหลว", "ตก"] },
+    { question: "flexible", options: ["คล่องตัว", "ยึดติด"] },
+    { question: "goods", options: ["สินค้า", "ดี"] }
+];
+
+const questionElement = document.getElementById('question');
+const optionsElement = document.getElementById('options');
+const wrongAnswerElement = document.getElementById('wrongans');
+const timerElement = document.getElementById('timer');
+const scoreElement = document.getElementById('score');
+const popupElement = document.getElementById('popup');
+
+let score = 0;
+let timerInterval;
+let gameIsOver = false;
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function loadQuestion() {
+    if (gameIsOver) return; // Exit if the game is over
+    const randomIndex = Math.floor(Math.random() * vocabulary.length);
+    const currentQuestion = vocabulary[randomIndex];
+    questionElement.textContent = currentQuestion.question;
+    optionsElement.innerHTML = '';
+    wrongAnswerElement.textContent = ''; // Clear previous wrong answer message
+
+    const shuffledOptions = [...currentQuestion.options];
+    shuffle(shuffledOptions);
+
+    shuffledOptions.forEach((option) => {
+        const optionButton = document.createElement('div');
+        optionButton.classList.add('option');
+        optionButton.textContent = option;
+        optionButton.addEventListener('click', () => {
+            if (gameIsOver) return; // Exit if the game is over
+            clearInterval(timerInterval); // Stop the timer
+            if (option === currentQuestion.options[0]) {
+                score++; // Increment score for correct answer
+                moveZombieImage()
+            } else {
+                wrongAnswerElement.textContent = 'Wrong answer. ';
+                showScore(); // Show total score
+                popupElement.style.display = 'block'; // Show popup button
+                gameIsOver = true; // Set game over flag
+                return; // Stop further execution
+            }
+            updateScoreDisplay(); // Update score display
+            loadQuestion(); // Load a new random question
+        });
+        optionsElement.appendChild(optionButton);
+    });
+
+    // Start the timer countdown
+    startTimer();
+}
+
+function startTimer() {
+    let timeLeft = 6;
+    updateTimerDisplay(timeLeft);
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay(timeLeft);
+
+        if (timeLeft === 0) {
+            clearInterval(timerInterval);
+            showScore(); // Show total score
+            popupElement.style.display = 'block'; // Show popup button
+            gameIsOver = true; // Set game over flag
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay(timeLeft) {
+    if (gameIsOver) {
+        document.getElementById('timer').style.display = 'none'; // Hide timer when game is over
+    } else {
+        document.getElementById('timer').style.display = 'block'; // Show timer when game is not over
+        document.getElementById('timer').textContent = `Time left: ${timeLeft} seconds`;
+    }
+}
+
+function moveZombieImage() {
+    const zombieImage = document.querySelector('.zombie');
+    const currentPosition = parseInt(zombieImage.style.left) || 0;
+    const newPosition = currentPosition + 10; // Increase left position by 10 pixels
+    zombieImage.style.left = `${newPosition}px`;
+}
+
+
+
+function updateScoreDisplay() {
+    scoreElement.textContent = `Score: ${score}`;
+}
+
+function showScore() {
+    scoreElement.textContent = `Total Score: ${score}`;
+}
+
+function goToIndexPage() {
+    window.location.href = 'index.html';
+}
+
+loadQuestion();
+
+function reloadPage() {
+    location.reload();
+}
+
+
+---------------------------------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWU SET MONSTER</title>
+    <link rel="stylesheet" href="game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="h1-zom">
+        <h1>SWU SET MONSTER</h1>
+        <img class="zombie" style="left: 200px;" src="/asset/zombie.png" alt="zombie">
+    </div>
+        <div class="conq">
+            <div id="question"></div>
+        </div>
+        <div id="options"></div>
+        <div id="timer"></div>
+        <div id="wrongans"></div>
+        <div id="score"></div>
+        <div class="container">
+            <div id="popup" style="display: none;">
+                <a href="/index.html"><button class="button-85" role="button">
+                    <ion-icon
+                            name="home-outline"></ion-icon> <br>HOME</button></a>
+                <button class="button-85" role="button" onclick="reloadPage()">
+                    <ion-icon name="refresh-outline"></ion-icon> <br>
+                    Try again
+                </button>
+            </div>
+        </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>

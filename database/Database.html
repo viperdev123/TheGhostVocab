@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Display</title>
+    <link rel="stylesheet" href="Database.css">
+</head>
+<body>
+    <div class="head">
+        <h1 class="vocab">Vocabulary List</h1>
+        <label class="label" for="lang">Choose a Language:</label>
+        <select id="lang" name="lang">
+            <option value="Eng">English</option>
+            <option value="Ch">Chinese</option>
+            <option value="Jp">Japanese</option>
+        </select>
+        <button class="addVocab" onclick="openPopup('add')"><ion-icon class="addCircle" name="add-circle"></ion-icon>Add new Vocabulary</button>
+    </div>
+    <table id="vocabulary-table">
+        <thead>
+            <tr>
+                <th>Vocabulary</th>
+                <th>Sub Vocabulary</th>
+                <th>Option 1</th>
+                <th>Option 2</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Vocabulary items will be displayed here -->
+        </tbody>
+    </table>
+
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2 id="popup-title">Add New Vocabulary</h2>
+            <form id="popup-form">
+                <label for="vocabulary">Vocabulary</label>
+                <input type="text" name="vocabulary" placeholder="Vocabulary">
+                <label for="subVocabulary">Sub Vocabulary</label>
+                <input type="text" name="subVocabulary" placeholder="Sub Vocabulary">
+                <label for="option1">Option 1</label>
+                <input type="text" name="option1" placeholder="Option 1">
+                <label for="option2">Option 2</label>
+                <input type="text" name="option2" placeholder="Option 2">
+                <button id="submitbtn" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Popup -->
+    <div id="edit-popup" class="popup edit-pop">
+        <div class="popup-content">
+            <span class="close" onclick="closeEditPopup()">&times;</span>
+            <h2 id="edit-popup-title">Edit Vocabulary</h2>
+            <form id="edit-popup-form">
+                <label for="edit-vocabulary">Vocabulary</label>
+                <input type="text" name="edit-vocabulary" placeholder="Edit Vocabulary">
+                <label for="edit-subVocabulary">Sub Vocabulary</label>
+                <input type="text" name="edit-subVocabulary" placeholder="Edit Sub Vocabulary">
+                <label for="edit-option1">Option 1</label>
+                <input type="text" name="edit-option1" placeholder="Edit Option 1">
+                <label for="edit-option2">Option 2</label>
+                <input type="text" name="edit-option2" placeholder="Edit Option 2">
+                <button id="edit-submitbtn" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reference the external JavaScript file -->
+    <script src="database.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Placeholder for action icons -->
+    <template id="action-icons-template">
+        <td>
+            <ion-icon style="display: none; color: rgb(0, 184, 0);" name="pencil-outline"></ion-icon>
+            <ion-icon style="color: red;" name="trash-outline"></ion-icon>
+        </td>
+    </template>
+</body>
+</html>

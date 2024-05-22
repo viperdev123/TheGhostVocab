@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE GHOST VOCAB</title>
+    <link rel="stylesheet" href="gameEng.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-image">
+        <div class="h1-zom">
+            <h1>THE GHOST VOCAB</h1>
+            <img class="zombie" style="left: 200px; height: 250px;" src="/asset/zombie.png">
+            <img class="chin" style="left: 1100px;" src="/asset/removechin.png">
+        </div>
+        <div id="question"></div>
+        <div id="options"></div>
+        <div id="timer"></div>
+        <div id="wrongans"></div>
+        <div id="score"></div>
+        <div class="container">
+            <div id="popup" style="display: none;">
+                <a href="/index.html"><button class="button-85" role="button">
+                        <ion-icon name="home-outline"></ion-icon> <br>HOME</button></a>
+                <button class="button-85" role="button" onclick="reloadPage()">
+                    <ion-icon name="refresh-outline"></ion-icon> <br>
+                    Try again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="gameEng.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="gameEng.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+@import url('https://fonts.cdnfonts.com/css/games');
+@import url('https://fonts.cdnfonts.com/css/molisa-delawere');
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap');
+
+
+body {
+  font-family: 'Mitr', sans-serif;
+  text-align: center;
+  background-color: black;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 60px;
+  text-transform: uppercase;
+	background: linear-gradient(to right, #3cff00 20%, #000000 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  font-family: 'Molisa Delawere';
+  margin-top: 0px;
+} 
+
+.zombie{
+  position: absolute;
+  width: auto;
+  top: 90px;
+  z-index: 0;
+  animation: rotate 2s linear infinite;
+  transition: left 0.5s ease;
+}
+.chin{
+  position: absolute;
+  top: 108px;
+  width: auto;
+  height: 200px;
+  left: 1100px;
+  animation: rotate 2s linear infinite;
+  transition: left 0.5s ease;
+  z-index: -1;
+}
+.h1-zom{
+  margin-bottom: 190px;
+  
+}
+
+#question {
+  font-size: 45px;
+  color: white;
+}
+#sub-question{
+  font-size: 20px;
+  color: white;
+}  
+
+.option {
+  font-family: "Kanit", sans-serif;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 10px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.option:hover {
+  background-color: #e0e0e0;
+  transition: .25s;
+  color: rgb(255, 0, 0);
+}
+
+#timer {
+  color: white;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+#wrongans{
+  color: rgb(255, 0, 0);
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+#score{
+  color: white;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+
+.button-85 {
+  margin-left: 40px;
+  margin-left: 40px;
+  font-family: 'Molisa Delawere';
+  line-height: 2;
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-85:before {
+  content: "";
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00,#ff7300,#ff0000);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+ion-icon {
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); } /* Changed to 50% */
+  to { transform: rotate(0deg); } /* Added final keyframe at 100% */
+}
